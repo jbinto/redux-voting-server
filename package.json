@@ -1,0 +1,19 @@
+{
+  "name": "redux-voting-server",
+  "version": "1.0.0",
+  "description": "Following [@teropa](https://twitter.com/teropa)'s \"[Full-Stack Redux Tutorial](http://teropa.info/blog/2015/09/10/full-stack-redux-tutorial.html)\", as of late Sept 2015.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jbinto/redux-voting-server.git"
+  },
+  "author": "Jesse Buchanan <hello@jessebuchanan.ca> (https://jessebuchanan.ca)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jbinto/redux-voting-server/issues"
+  },
+  "homepage": "https://github.com/jbinto/redux-voting-server#readme"
+}
