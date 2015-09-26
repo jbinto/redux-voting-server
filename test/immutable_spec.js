@@ -1,4 +1,5 @@
 import {expect} from 'chai';
+import {List} from 'immutable';
 
 describe('immutability', () => {
 
@@ -17,5 +18,33 @@ describe('immutability', () => {
     })
 
   });
+
+
+  describe('a list', () => {
+    function addCity(currentState, city) {
+      // Immutable.js always returns new, mutated objects.
+      return currentState.push(city);
+    }
+
+    it('is immutable', () => {
+      let state = List.of('Toronto', 'Calgary');
+      let nextState = addCity(state, 'Vancouver');
+
+      // The original list hasn't been changed.
+      expect(state).to.equal(List.of(
+        'Toronto',
+        'Calgary'
+      ));
+
+      expect(nextState).to.equal(List.of(
+        'Toronto',
+        'Calgary',
+        'Vancouver'
+      ));
+    });
+
+  });
+
+
 
 });
