@@ -35,25 +35,22 @@ export function next(state) {
                    .concat(getWinners(vote));
 
 
+  if (entries.size === 1) {
+    return state
+      .remove('vote')
+      .remove('entries')
+      .set('winner', entries.first());
+  }
 
   // Map.merge: https://facebook.github.io/immutable-js/docs/#/Map/merge
   //  * x.merge(y) => merges map y into map x, with y "winning all ties"
   //  * List.take: new list, but "take" only the first N
   //  * List.skip: new list, but "skip" the first N
 
-  const nextState = state.merge({
+  return state.merge({
     vote: Map({ pair: entries.take(2) }),
     entries: entries.skip(2)
   });
-  console.log(`nextState: ${nextState}`);
-
-  // If the new state has a "pair" of one, we're done.
-  // Would love to see how to refactor this code to be a bit nicer.
-  const nextPair = nextState.getIn(['vote', 'pair']);
-  if (nextPair.size == 1)
-    return Map({ 'winner': nextPair.first() });
-  else
-    return nextState;
 }
 
 export function vote(state, winner) {
