@@ -98,44 +98,32 @@ describe('application logic', () => {
 
   describe('vote', () => {
     it('creates a tally for the voted entry', () => {
-      const state = fromJS({
-        vote: {
-          pair: ['Toronto', 'Chicago']
-        },
-        entries: []
+      const voteState = fromJS({
+        pair: ['Toronto', 'Chicago']
       });
-      const nextState = vote(state, 'Chicago'); // boo!
-      expect(nextState).to.equal(fromJS({
-        vote: {
-          pair: ['Toronto', 'Chicago'],
-          tally: {
-            "Chicago": 1
-          }
-        },
-        entries: []
+      const nextVoteState = vote(voteState, 'Chicago'); // boo!
+      expect(nextVoteState).to.equal(fromJS({
+        pair: ['Toronto', 'Chicago'],
+        tally: {
+          "Chicago": 1
+        }
       }));
 
     });
 
     it('adds to existing tally for the voted entry', () => {
-      const state = fromJS({
-        vote: {
-          pair: ['Toronto', 'Chicago'],
-          tally: {
-            "Chicago": 1
-          }
-        },
-        entries: []
+      const voteState = fromJS({
+        pair: ['Toronto', 'Chicago'],
+        tally: {
+          "Chicago": 1
+        }
       });
-      const nextState = vote(state, 'Chicago'); // boo!
-      expect(nextState).to.equal(fromJS({
-        vote: {
-          pair: ['Toronto', 'Chicago'],
-          tally: {
-            "Chicago": 2
-          }
-        },
-        entries: []
+      const nextVoteState = vote(voteState, 'Chicago'); // boo!
+      expect(nextVoteState).to.equal(fromJS({
+        pair: ['Toronto', 'Chicago'],
+        tally: {
+          "Chicago": 2
+        }
       }));
     });
 

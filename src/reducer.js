@@ -8,7 +8,13 @@ export default function reducer(state = INITIAL_STATE, action) {
     case 'NEXT':
       return next(state);
     case 'VOTE':
-      return vote(state, action.entry);
+      // Reducer composibility:
+      // It is the reducer's responsibility to split up the state into smaller
+      // chunks and hand it off.
+      // More here: http://rackt.github.io/redux/docs/basics/Reducers.html
+      return state.update('vote',
+        voteState => vote(voteState, action.entry)
+      );
     default:
       return state;
   }

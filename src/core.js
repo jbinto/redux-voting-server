@@ -55,14 +55,12 @@ export function next(state) {
   });
 }
 
-export function vote(state, winner) {
- // Simplest thing...
- // Set vote.tally.${winner} += 1
+export function vote(voteState, winner) {
+  // Simplest thing...
+  // Set vote.tally.${winner} += 1
 
- // updateIn reaches deep into nested data structures.
- // It will recursively generate any missing keys.
- // 0 is the default number if not present.
- return state.updateIn(['vote', 'tally', winner], 0, (val) => {
-   return val+1;
- });
+  // updateIn reaches deep into nested data structures.
+  // It will recursively generate any missing keys.
+  // 0 is the default number if not present.
+  return voteState.updateIn(['tally', winner], 0, val => val + 1);
 };
