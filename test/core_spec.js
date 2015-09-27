@@ -1,7 +1,7 @@
 import {List,Map} from 'immutable';
 import {expect} from 'chai';
 
-import {setEntries} from '../src/core';
+import {setEntries, next} from '../src/core';
 
 describe('application logic', () => {
 
@@ -34,6 +34,25 @@ describe('application logic', () => {
       }));
     })
 
+  });
+
+  // 'next' is what advances the vote.
+  // Don't forget, we're working with immutables here.
+  // We need to "reconstruct" the entire state tree every time we mutate it.
+  describe('next', () => {
+
+    it('takes the next two entries under vote', () => {
+      const state = Map({
+        entries: List.of('Toronto', 'Chicago', 'Boston')
+      });
+      const nextState = next(state);
+      expect(nextState).to.equal(Map({
+        vote: Map({
+          pair: List.of('Toronto', 'Chicago')
+        }),
+        entries: List.of('Boston')
+      }));
+    });
   });
 
 });
