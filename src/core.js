@@ -27,7 +27,7 @@ export function vote(state, winner) {
  // Set vote.tally.${winner} = 1
 
  // updateIn reaches deep into nested data structures.
- return state.updateIn(['vote', 'tally', winner], (val) => {
-   return val ? val+1 : 1;
+ return state.updateIn(['vote', 'tally', winner], 0, (val) => {
+   return val+1;
  });
 };
