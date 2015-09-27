@@ -76,9 +76,27 @@ describe('application logic', () => {
 
     });
 
-    // it('adds to existing tally for the voted entry', () {
-    //
-    // });
+    it('adds to existing tally for the voted entry', () => {
+      const state = fromJS({
+        vote: {
+          pair: ['Toronto', 'Chicago'],
+          tally: {
+            "Chicago": 1
+          }
+        },
+        entries: []
+      });
+      const nextState = vote(state, 'Chicago'); // boo!
+      expect(nextState).to.equal(fromJS({
+        vote: {
+          pair: ['Toronto', 'Chicago'],
+          tally: {
+            "Chicago": 2
+          }
+        },
+        entries: []
+      }));
+    });
 
   });
 
