@@ -45,4 +45,27 @@ describe('reducer', () => {
 
   });
 
+  it('can be used with reduce', () => {
+    const actions = [
+      { type: 'SET_ENTRIES', entries: ['Toronto', 'Chicago'] },
+      { type: 'NEXT' },
+      { type: 'VOTE', entry: 'Toronto' },
+      { type: 'VOTE', entry: 'Chicago' },
+      { type: 'VOTE', entry: 'Toronto' },
+      { type: 'NEXT' }
+    ];
+
+    const finalState = actions.reduce(reducer, Map());
+
+    // That's why it's called a reducer.  Mind blown.
+    // Very neat to see it zip through events like this.
+    //
+    // MDN: "[reducer] applies a function against an accumulator and each value
+    // of the array (from left-to-right) to reduce it to a single value."
+    expect(finalState).to.equal(fromJS({
+      winner: 'Toronto'
+    }));
+
+  });
+
 });
