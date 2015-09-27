@@ -19,3 +19,14 @@ npm run test --watch
 ```
 AssertionError: expected { Object (size, _root, ...) } to equal { Object (size, _root, ...) }
 ```
+
+## Debugging mocha tests
+
+```
+npm install node-inspector
+node-inspector
+./node_modules/mocha/bin/mocha --compilers js:babel/register --recursive --debug-brk
+open http://127.0.0.1:8080/?ws=127.0.0.1:8080&port=5858
+```
+
+Source: http://stackoverflow.com/a/15884692/19779
