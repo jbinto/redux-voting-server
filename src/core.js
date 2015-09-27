@@ -5,6 +5,7 @@ export function setEntries(state, entries) {
 }
 
 function getWinners(vote) {
+  console.log(`enter getWinners; vote=${vote}`);
   if (!vote) return [];
 
   // ES6 destructuring: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment
@@ -25,22 +26,34 @@ function getWinners(vote) {
 
 export function next(state) {
   // Simplest thing we can possibly do to make the test pass:
-  // 1) Put the first two items in `entries` into `vote.pair`
+  // 1) Put the first two items in `entries` into `vote.pair`,
   // 2) Generate an array of winner(s),
+  // 3) If we're at the last one, show a winner.
 
   const vote = state.get('vote');
   const entries = state.get('entries')
                    .concat(getWinners(vote));
+
+
 
   // Map.merge: https://facebook.github.io/immutable-js/docs/#/Map/merge
   //  * x.merge(y) => merges map y into map x, with y "winning all ties"
   //  * List.take: new list, but "take" only the first N
   //  * List.skip: new list, but "skip" the first N
 
-  return state.merge({
+  const nextState = state.merge({
     vote: Map({ pair: entries.take(2) }),
     entries: entries.skip(2)
   });
+  console.log(`nextState: ${nextState}`);
+
+  // If the new state has a "pair" of one, we're done.
+  // Would love to see how to refactor this code to be a bit nicer.
+  const nextPair = nextState.getIn(['vote', 'pair']);
+  if (nextPair.size == 1)
+    return Map({ 'winner': nextPair.first() });
+  else
+    return nextState;
 }
 
 export function vote(state, winner) {

@@ -65,21 +65,34 @@ describe('application logic', () => {
         },
         entries: ['Boston', 'Washington', 'New York']
       });
-
       const nextState = next(state);
-
-      console.log(`nextState: ${nextState}`);
-
       expect(nextState).to.equal(fromJS({
         vote: {
           pair: ['Boston', 'Washington'],
         },
         entries: ['New York', 'Chicago']
       }));
-
-
-
     });
+
+    it('marks winner at the last vote', () => {
+      const state = fromJS({
+        vote: {
+          pair: ['Toronto', 'Chicago'],
+          tally: {
+            'Toronto': 5,
+            'Chicago': 0
+          }
+        },
+        entries: []
+      });
+      const nextState = next(state);
+      console.log(nextState);
+
+      expect(nextState).to.equal(fromJS({
+        winner: 'Toronto'
+      }));
+
+    })
 
   });
 
