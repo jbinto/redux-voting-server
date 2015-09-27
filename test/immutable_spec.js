@@ -47,10 +47,7 @@ describe('immutability', () => {
 
   describe('a tree', () => {
     function addCity(currentState, city) {
-      return currentState.set(
-        'cities',
-        currentState.get('cities').push(city)
-      );
+      return currentState.update('cities', cities => cities.push(city));
     }
 
     it('is immutable', () => {
