@@ -22,9 +22,17 @@ describe('application logic', () => {
       expect(nextState).to.equal(Map({
         entries: List.of('Toronto', 'Montréal')
       }));
-
-
     });
+
+    it('converts to immutable', () => {
+      const state = Map();
+      const entries = ['Toronto', 'Chicago'];
+      const nextState = setEntries(state, entries);
+
+      expect(nextState).to.equal(Map({
+        entries: List.of('Toronto', 'Chicago')
+      }));
+    })
 
   });
 
