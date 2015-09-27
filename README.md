@@ -20,6 +20,10 @@ npm run test --watch
 AssertionError: expected { Object (size, _root, ...) } to equal { Object (size, _root, ...) }
 ```
 
+## Lessons learned
+
+* Immutable collections are pretty awkward to work with at first.
+
 ## Debugging mocha tests
 
 ```
