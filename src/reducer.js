@@ -1,9 +1,7 @@
 import {Map, List} from 'immutable';
-import {setEntries,next,vote} from '../src/core';
+import {setEntries,next,vote, INITIAL_STATE} from '../src/core';
 
-export default function reducer(state, action) {
-  if (!state) state = Map();
-
+export default function reducer(state = INITIAL_STATE, action) {
   switch (action.type) {
     case 'SET_ENTRIES':
       return setEntries(state, action.entries);
@@ -12,6 +10,6 @@ export default function reducer(state, action) {
     case 'VOTE':
       return vote(state, action.entry);
     default:
-      return Map();
+      return state;
   }
 }
