@@ -21,3 +21,11 @@ export function next(state) {
     entries: entries.skip(2)
   });
 }
+
+export function vote(state, winner) {
+ // Simplest thing...
+ // Set vote.tally.${winner} = 1
+
+ // updateIn reaches deep into nested data structures.
+ return state.updateIn(['vote', 'tally', winner], val => 1);
+};

@@ -1,7 +1,7 @@
-import {List,Map} from 'immutable';
+import {List,Map,fromJS} from 'immutable';
 import {expect} from 'chai';
 
-import {setEntries, next} from '../src/core';
+import {setEntries, next, vote} from '../src/core';
 
 describe('application logic', () => {
 
@@ -53,6 +53,33 @@ describe('application logic', () => {
         entries: List.of('Boston')
       }));
     });
+  });
+
+  describe('vote', () => {
+    it('creates a tally for the voted entry', () => {
+      const state = fromJS({
+        vote: {
+          pair: ['Toronto', 'Chicago']
+        },
+        entries: []
+      });
+      const nextState = vote(state, 'Chicago'); // boo!
+      expect(nextState).to.equal(fromJS({
+        vote: {
+          pair: ['Toronto', 'Chicago'],
+          tally: {
+            "Chicago": 1
+          }
+        },
+        entries: []
+      }));
+
+    });
+
+    // it('adds to existing tally for the voted entry', () {
+    //
+    // });
+
   });
 
 });
