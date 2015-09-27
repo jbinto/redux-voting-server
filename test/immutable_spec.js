@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {List} from 'immutable';
+import {List, Map} from 'immutable';
 
 describe('immutability', () => {
 
@@ -30,19 +30,53 @@ describe('immutability', () => {
       let state = List.of('Toronto', 'Calgary');
       let nextState = addCity(state, 'Vancouver');
 
-      // The original list hasn't been changed.
-      expect(state).to.equal(List.of(
-        'Toronto',
-        'Calgary'
-      ));
-
+      // The new list has modifications applied.
       expect(nextState).to.equal(List.of(
         'Toronto',
         'Calgary',
         'Vancouver'
       ));
-    });
 
+      // The original list is immutable.
+      expect(state).to.equal(List.of(
+        'Toronto',
+        'Calgary'
+      ));
+    });
+  });
+
+  describe('a tree', () => {
+    function addCity(currentState, city) {
+      return currentState.set(
+        'cities',
+        currentState.get('cities').push(city)
+      );
+    }
+
+    it('is immutable', () => {
+      let state = Map({
+        cities: List.of('Toronto', 'Calgary', 'Vancouver')
+      });
+      let nextState = addCity(state, 'Seattle');
+
+      expect(nextState).to.equal(Map({
+        cities: List.of(
+          'Toronto',
+          'Calgary',
+          'Vancouver',
+          'Seattle'
+        )
+      }));
+
+      // Original state tree is unmodified.
+      expect(state).to.equal(Map({
+        cities: List.of(
+          'Toronto',
+          'Calgary',
+          'Vancouver'
+        )
+      }))
+    });
   });
 
 
