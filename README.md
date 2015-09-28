@@ -1,8 +1,16 @@
 # jbinto/redux-voting-server
 
-Following [@teropa](https://twitter.com/teropa)'s "[Full-Stack Redux Tutorial](http://teropa.info/blog/2015/09/10/full-stack-redux-tutorial.html)", as of late Sept 2015.
+This is a Babel / Socket.io / Redux / Immutable.js backend for [jbinto/redux-voting-client](https://github.com/jbinto/redux-voting-client).
+
+I am following [@teropa](https://twitter.com/teropa)'s "[Full-Stack Redux Tutorial](http://teropa.info/blog/2015/09/10/full-stack-redux-tutorial.html)", as of late Sept 2015.
 
 ## Usage
+
+### Starting socket.io server
+
+```
+npm run start
+```
 
 ### Running tests
 
@@ -14,7 +22,6 @@ npm run test --watch
 
 ```
 $ babel-node
-
 > const store = require('./index').store;
 ```
 
