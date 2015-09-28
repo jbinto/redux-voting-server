@@ -4,11 +4,20 @@ Following [@teropa](https://twitter.com/teropa)'s "[Full-Stack Redux Tutorial](h
 
 ## Usage
 
-Run the tests:
+### Running tests
 
 ```
 npm run test --watch
 ```
+
+### Interacting with the store in the REPL
+
+```
+$ babel-node
+
+> const store = require('./index').store;
+```
+
 
 ## Gripes / lessons learned / thoughts / questions
 
@@ -38,4 +47,4 @@ Using the console is a bit laggy. At first I didn't think it was working, but yo
 
 * Immutable collections are pretty awkward to work with at first, and still feel like magic. So I can keep copies at will on each mutation, and not worry about excessive memory usage due to naively keeping copies? Apparently. But how do I verify that?
 
-* Reducers appear really obviously beneficial at first: your entire application state is declarative. But this seems like it would be more difficult/awkward when applications get bigger: giant global state variables being passed around all the time.
+* Reducers appear really obviously beneficial at first: your entire application state is declarative. But this seems like it would be more difficult/awkward when applications get bigger: giant global state variables being passed around all the time. (**edit:** This is what reducer composibility is for.)
