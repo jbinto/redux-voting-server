@@ -14,4 +14,10 @@ export default function startServer(store) {
     // Using top level `io.emit` emits to all clients
     () => io.emit('state', store.getState().toJS())
   );
+
+  // Give new clients the state.
+  io.on('connection', (socket) => {
+    console.debug('new websocket connection, providing state');
+    socket.emit('state', store.getState().toJS());
+  });
 }
