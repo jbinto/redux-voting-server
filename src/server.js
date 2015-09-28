@@ -15,8 +15,12 @@ export default function startServer(store) {
     () => io.emit('state', store.getState().toJS())
   );
 
-  // Give new clients the state.
   io.on('connection', (socket) => {
+    // Respond to 'action' by passing it directly to store.dispatch()
+    const dispatch = store.dispatch.bind(store);
+    socket.on('action', dispatch);
+
+    // Give new clients the state.
     console.debug('new websocket connection, providing state');
     socket.emit('state', store.getState().toJS());
   });
