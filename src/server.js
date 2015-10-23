@@ -21,7 +21,7 @@ export default function startServer(store) {
     socket.on('action', dispatch);
 
     // Give new clients the state.
-    console.debug('new websocket connection, providing state');
+    console.log('new websocket connection, providing state');
     socket.emit('state', store.getState().toJS());
   });
 }
