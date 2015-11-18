@@ -3,9 +3,14 @@
   "version": "1.0.0",
   "description": "Following [@teropa](https://twitter.com/teropa)'s \"[Full-Stack Redux Tutorial](http://teropa.info/blog/2015/09/10/full-stack-redux-tutorial.html)\", as of late Sept 2015.",
   "main": "index.js",
+  "babel": {
+    "presets": [
+      "es2015"
+    ]
+  },
   "scripts": {
     "start": "babel-node index.js",
-    "test": "mocha --compilers js:babel/register --recursive --require ./test/test_helper.js",
+    "test": "mocha --compilers js:babel-core/register --recursive --require ./test/test_helper.js",
     "test:watch": "npm run test -- --watch"
   },
   "repository": {
@@ -19,14 +24,15 @@
   },
   "homepage": "https://github.com/jbinto/redux-voting-server#readme",
   "devDependencies": {
-    "babel": "^5.8.23",
-    "chai": "^3.3.0",
-    "chai-immutable": "^1.3.0",
-    "mocha": "^2.3.3"
+    "babel-core": "^6.1.21",
+    "babel-preset-es2015": "^6.1.18",
+    "chai": "^3.4.1",
+    "chai-immutable": "^1.5.2",
+    "mocha": "^2.3.4"
   },
   "dependencies": {
     "immutable": "^3.7.5",
-    "redux": "^3.0.2",
+    "redux": "^3.0.4",
     "socket.io": "^1.3.7"
   }
 }
