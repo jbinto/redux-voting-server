@@ -23,7 +23,7 @@ export default function startServer(store) {
     // Respond to 'action' by passing it directly to store.dispatch()
     const dispatch = (action) => {
       console.log(`action received: ${JSON.stringify(action)}`);
-      store.dispatch.bind(store);
+      store.dispatch(action);
     }
     socket.on('action', dispatch);
 
