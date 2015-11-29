@@ -10,14 +10,21 @@ export default function startServer(store) {
   //
   // This could certainly be optimized further.
 
-  store.subscribe(
-    // Using top level `io.emit` emits to all clients
-    () => io.emit('state', store.getState().toJS())
+  store.subscribe(() => {
+      const state = store.getState().toJS();
+      console.log(`store changed, broadcasting new state: ${JSON.stringify(state)}`);
+
+      // Using top level `io.emit` emits to all clients
+      io.emit('state', state);
+    }
   );
 
   io.on('connection', (socket) => {
     // Respond to 'action' by passing it directly to store.dispatch()
-    const dispatch = store.dispatch.bind(store);
+    const dispatch = (action) => {
+      console.log(`action received: ${JSON.stringify(action)}`);
+      store.dispatch.bind(store);
+    }
     socket.on('action', dispatch);
 
     // Give new clients the state.
